@@ -143,7 +143,7 @@ void Queue<T>::clear()
 }
 
 /**
- * Prints Queue nodes
+ * Print all nodes
  */
 template <class T>
 void Queue<T>::echo() const
@@ -158,7 +158,7 @@ void Queue<T>::echo() const
 }
 
 /**
- * Returns if Queue is empty or not
+ * Return if Queue is empty or not
  * 
  * @return True if empty, false if not empty
  */

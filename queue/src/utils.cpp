@@ -13,7 +13,7 @@
 using namespace std;
 
 /**
- * Prints available actions
+ * Print available actions
  */
 void print_actions()
 {
