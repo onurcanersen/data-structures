@@ -1,6 +1,6 @@
 CC = g++
 CFLAGS = -Wall -Werror
-EXE = ./bin/binary_search_tree
+EXE = ./bin/bst
 SRC = ./src
 OBJ = ./build
 BIN = ./bin
