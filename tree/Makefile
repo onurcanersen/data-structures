@@ -1,9 +1,11 @@
+# @author Onurcan Erşen
+
 CC = g++
 CFLAGS = -Wall -Werror
-EXE = ./bin/bst
-SRC = ./src
-OBJ = ./build
+EXE = ./bin/tree
 BIN = ./bin
+OBJ = ./build
+SRC = ./src
 SRCS = $(wildcard $(SRC)/*.cpp)
 OBJS = $(patsubst $(SRC)/%.cpp,$(OBJ)/%.o,$(SRCS))
 
@@ -14,7 +16,7 @@ $(OBJ)/%.o: $(SRC)/%.cpp
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	$(RM) -r $(OBJ)/* $(BIN)/*
+	$(RM) -r $(BIN)/* $(OBJ)/*
 
 run:
 	$(EXE)

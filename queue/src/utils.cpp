@@ -17,28 +17,27 @@ using namespace std;
  */
 void print_actions()
 {
-    cout << "A - Add to queue" << endl;
-    cout << "R - Remove from queue" << endl;
+    cout << "I - Insert data" << endl;
+    cout << "R - Remove data" << endl;
     cout << "C - Clear queue" << endl;
     cout << "P - Print queue" << endl;
     cout << "E - Exit" << endl
-         << endl
          << endl;
 }
 
 /**
- * Add integer to the back of queue
+ * Insert integer to the back of queue
  * 
- * @param queue Queue to add
+ * @param queue Queue to insert to
  */
-void add(Queue<int> &queue)
+void insert(Queue<int> &queue)
 {
     cout << "Enter an integer: ";
     int data;
     cin >> data;
     queue.enqueue(data);
     cout << "New queue: ";
-    queue.echo();
+    queue.print();
 }
 
 /**
@@ -52,25 +51,12 @@ void remove(Queue<int> &queue)
     {
         cout << queue.dequeue() << " removed from queue." << endl;
         cout << "New queue: ";
-        queue.echo();
+        queue.print();
     }
     catch (char const *e)
     {
         cout << e << endl;
     }
-}
-
-/**
- * Remove all integers from queue
- * 
- * @param queue Queue to clear
- */
-void clear(Queue<int> &queue)
-{
-    queue.clear();
-    cout << "Queue has been cleared." << endl;
-    cout << "New queue: ";
-    queue.echo();
 }
 
 /**
@@ -83,9 +69,9 @@ void perform_action(char choice, Queue<int> &queue)
 {
     switch (choice)
     {
-    case 'A':
-    case 'a':
-        add(queue);
+    case 'I':
+    case 'i':
+        insert(queue);
         break;
     case 'R':
     case 'r':
@@ -93,18 +79,20 @@ void perform_action(char choice, Queue<int> &queue)
         break;
     case 'C':
     case 'c':
-        clear(queue);
+        queue.clear();
+        cout << "Queue has been cleared." << endl;
         break;
     case 'P':
     case 'p':
         cout << "Queue: ";
-        queue.echo();
+        queue.print();
         break;
     case 'E':
     case 'e':
+        cout << "Exiting application." << endl;
         break;
     default:
-        cout << "Enter a valid choice." << endl;
+        cout << "Enter a valid action." << endl;
         break;
     }
 }

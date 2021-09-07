@@ -25,6 +25,8 @@ public:
 
 /**
  * Node constructor
+ * 
+ * @param data Node data
  */
 template <class T>
 Node<T>::Node(const T &data)

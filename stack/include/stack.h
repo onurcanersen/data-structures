@@ -18,152 +18,60 @@ template <class T>
 class Stack
 {
     Node<T> *top;
-    void add(const T &);
 
 public:
-    Stack();                               // Constructor
-    Stack(const Stack<T> &);               // Copy constructor
-    Stack<T> &operator=(const Stack<T> &); // Copy assignment operator
-    ~Stack();                              // Destructor
+    Stack();
     void push(const T &);
     T pop();
+    void print() const;
     void clear();
-    void echo() const;
-    bool empty() const;
-    Node<T> *getTop() const;      // Getters
-    void setTop(const Node<T> *); // Setters
+    ~Stack();
 };
 
 /**
- * Stack class template constructor
+ * Stack constructor
  */
 template <class T>
 Stack<T>::Stack()
 {
-    this->top = NULL;
+    this->top = nullptr;
 }
 
 /**
- * Add data to the end of top linked-list
+ * Insert data to the top of stack
  * 
- * Use only in copy constructor and
- * copy assignment operator, thus private
- * 
- * @param data Data to add
- */
-template <class T>
-void Stack<T>::add(const T &data)
-{
-    if (this->empty())
-    {
-        this->top = new Node<T>(data);
-    }
-    else
-    {
-        Node<T> *current = this->top;
-        while (current->next)
-            current = current->next;
-        current->next = new Node<T>(data);
-    }
-}
-
-/**
- * Stack copy constructor
- * 
- * @param other Stack to copy from
- */
-template <class T>
-Stack<T>::Stack(const Stack<T> &other)
-{
-    this->top = NULL;
-    Node<T> *current = other.top;
-    while (current)
-    {
-        this->add(current->data);
-        current = current->next;
-    }
-}
-
-/**
- * Stack copy assignment operator
- * 
- * @param other Stack to assign
- * @return Assigned Stack
- */
-template <class T>
-Stack<T> &Stack<T>::operator=(const Stack<T> &other)
-{
-    this->clear();
-    Node<T> *current = other.top;
-    while (current)
-    {
-        this->add(current->data);
-        current = current->next;
-    }
-    return *this;
-}
-
-/**
- * Stack class template destructor
- */
-template <class T>
-Stack<T>::~Stack()
-{
-    this->clear();
-}
-
-/**
- * Add data to the top of Stack
- * 
- * @param data Data to add
+ * @param data Data to insert
  */
 template <class T>
 void Stack<T>::push(const T &data)
 {
-    Node<T> *newNode = new Node<T>(data);
-    newNode->next = this->top;
-    this->top = newNode;
+    Node<T> *new_node = new Node<T>(data);
+    new_node->next = this->top;
+    this->top = new_node;
 }
 
 /**
- * Remove data from the top of Stack
+ * Remove data from the top of stack
  * 
  * @return Removed data
  */
 template <class T>
 T Stack<T>::pop()
 {
-    if (this->empty())
+    if (!this->top)
         throw "Stack is empty.";
-    T data = this->top->data;
     Node<T> *temp = this->top;
-    this->top = temp->next;
+    T data = temp->data;
+    this->top = this->top->next;
     delete temp;
     return data;
-}
-
-/**
- * Remove all nodes
- */
-template <class T>
-void Stack<T>::clear()
-{
-    Node<T> *current = this->top;
-    Node<T> *temp;
-    while (current)
-    {
-        temp = current;
-        current = current->next;
-        delete temp;
-    }
-    this->top = NULL;
 }
 
 /**
  * Print all nodes
  */
 template <class T>
-void Stack<T>::echo() const
+void Stack<T>::print() const
 {
     Node<T> *current = this->top;
     while (current)
@@ -174,28 +82,27 @@ void Stack<T>::echo() const
 }
 
 /**
- * Return if Stack is empty or not
- * 
- * @return True if empty, false if not empty
+ * Remove all nodes
  */
 template <class T>
-bool Stack<T>::empty() const
+void Stack<T>::clear()
 {
-    return !this->top;
+    Node<T> *temp;
+    while (this->top)
+    {
+        temp = this->top;
+        this->top = this->top->next;
+        delete temp;
+    }
 }
 
-// Getters
+/**
+ * Stack destructor
+ */
 template <class T>
-Node<T> *Stack<T>::getTop() const
+Stack<T>::~Stack()
 {
-    return this->top;
-}
-
-// Setters
-template <class T>
-void Stack<T>::setTop(const Node<T> *top)
-{
-    this->top = top;
+    this->clear();
 }
 
 #endif

@@ -20,85 +20,33 @@ class Queue
     Node<T> *front;
 
 public:
-    Queue();                               // Constructor
-    Queue(const Queue<T> &);               // Copy constructor
-    Queue<T> &operator=(const Queue<T> &); // Copy assignment operator
-    ~Queue();                              // Destructor
+    Queue();
     void enqueue(const T &);
     T dequeue();
+    void print() const;
     void clear();
-    void echo() const;
-    bool empty() const;
-    Node<T> *getFront() const;      // Getters
-    void setFront(const Node<T> *); // Setters
+    ~Queue();
 };
 
 /**
- * Queue class template constructor
+ * Queue constructor
  */
 template <class T>
 Queue<T>::Queue()
 {
-    front = NULL;
+    this->front = nullptr;
 }
 
 /**
- * Queue copy constructor
+ * Insert node to the back of queue
  * 
- * @param other Queue to copy from
- */
-template <class T>
-Queue<T>::Queue(const Queue<T> &other)
-{
-    this->front = NULL;
-    Node<T> *current = other.front;
-    while (current)
-    {
-        this->enqueue(current->data);
-        current = current->next;
-    }
-}
-
-/**
- * Queue copy assignment operator
- * 
- * @param other Queue to assign
- * @return Assigned Queue
- */
-template <class T>
-Queue<T> &Queue<T>::operator=(const Queue<T> &other)
-{
-    this->clear();
-    Node<T> *current = other.front;
-    while (current)
-    {
-        this->enqueue(current->data);
-        current = current->next;
-    }
-    return *this;
-}
-
-/**
- * Queue class template destructor
- */
-template <class T>
-Queue<T>::~Queue()
-{
-    this->clear();
-}
-
-/**
- * Add node to the back of Queue
- * 
- * @param data Data to add
+ * @param data Data to insert
  */
 template <class T>
 void Queue<T>::enqueue(const T &data)
 {
-    if (this->empty())
-    {
+    if (!this->front)
         this->front = new Node<T>(data);
-    }
     else
     {
         Node<T> *current = this->front;
@@ -109,44 +57,27 @@ void Queue<T>::enqueue(const T &data)
 }
 
 /**
- * Remove node from the front of Queue
+ * Remove node from the front of queue
  * 
  * @return Removed data
  */
 template <class T>
 T Queue<T>::dequeue()
 {
-    if (this->empty())
+    if (!this->front)
         throw "Queue is empty.";
-    T data = this->front->data;
     Node<T> *temp = this->front;
-    this->front = temp->next;
+    T data = temp->data;
+    this->front = this->front->next;
     delete temp;
     return data;
-}
-
-/**
- * Remove all nodes
- */
-template <class T>
-void Queue<T>::clear()
-{
-    Node<T> *current = this->front;
-    Node<T> *temp;
-    while (current)
-    {
-        temp = current;
-        current = current->next;
-        delete temp;
-    }
-    this->front = NULL;
 }
 
 /**
  * Print all nodes
  */
 template <class T>
-void Queue<T>::echo() const
+void Queue<T>::print() const
 {
     Node<T> *current = this->front;
     while (current)
@@ -158,28 +89,27 @@ void Queue<T>::echo() const
 }
 
 /**
- * Return if Queue is empty or not
- * 
- * @return True if empty, false if not empty
+ * Remove all nodes
  */
 template <class T>
-bool Queue<T>::empty() const
+void Queue<T>::clear()
 {
-    return !this->front;
+    Node<T> *temp;
+    while (this->front)
+    {
+        temp = this->front;
+        this->front = this->front->next;
+        delete temp;
+    }
 }
 
-// Getters
+/**
+ * Queue destructor
+ */
 template <class T>
-Node<T> *Queue<T>::getFront() const
+Queue<T>::~Queue()
 {
-    return this->front;
-}
-
-// Setters
-template <class T>
-void Queue<T>::setFront(const Node<T> *front)
-{
-    this->front = front;
+    this->clear();
 }
 
 #endif

@@ -11,9 +11,8 @@
 #include "queue.h"
 
 void print_actions();
-void add(Queue<int> &);
+void insert(Queue<int> &);
 void remove(Queue<int> &);
-void clear(Queue<int> &);
 void perform_action(char, Queue<int> &);
 
 #endif

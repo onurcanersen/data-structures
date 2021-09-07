@@ -1,6 +1,6 @@
 /**
  * main.cpp
- * Main function
+ * Main application
  * 
  * @author Onurcan Erşen
  */
@@ -8,14 +8,14 @@
 #include <iostream>
 
 #include "../include/utils.h"
-#include "../include/stack.h"
+#include "../include/tree.h"
 
 using namespace std;
 
 int main()
 {
     char choice;
-    Stack<int> ints;
+    Tree<int> ints;
     do
     {
         print_actions();

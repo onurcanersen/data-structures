@@ -8,11 +8,11 @@
 #ifndef UTILS_H
 #define UTILS_H
 
-#include "stack.h"
+#include "tree.h"
 
 void print_actions();
-void insert(Stack<int> &);
-void remove(Stack<int> &);
-void perform_action(char, Stack<int> &);
+void insert(Tree<int> &);
+void remove(Tree<int> &);
+void perform_action(char, Tree<int> &);
 
 #endif

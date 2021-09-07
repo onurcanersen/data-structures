@@ -19,9 +19,10 @@ int main()
     do
     {
         print_actions();
-        cout << "Enter a choice: ";
+        cout << "Enter an action: ";
         cin >> choice;
         perform_action(choice, ints);
+        cout << endl;
     } while (choice != 'E' && choice != 'e');
     return EXIT_SUCCESS;
 }

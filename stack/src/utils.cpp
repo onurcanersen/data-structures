@@ -17,28 +17,27 @@ using namespace std;
  */
 void print_actions()
 {
-    cout << "A - Add to stack" << endl;
-    cout << "R - Remove from stack" << endl;
+    cout << "I - Insert data" << endl;
+    cout << "R - Remove data" << endl;
     cout << "C - Clear stack" << endl;
     cout << "P - Print stack" << endl;
     cout << "E - Exit" << endl
-         << endl
          << endl;
 }
 
 /**
- * Add integer to the top of stack
+ * Insert integer to the top of stack
  * 
- * @param stack Stack to add
+ * @param stack Stack to insert to
  */
-void add(Stack<int> &stack)
+void insert(Stack<int> &stack)
 {
     cout << "Enter an integer: ";
     int data;
     cin >> data;
     stack.push(data);
     cout << "New stack:" << endl;
-    stack.echo();
+    stack.print();
 }
 
 /**
@@ -52,25 +51,12 @@ void remove(Stack<int> &stack)
     {
         cout << stack.pop() << " removed from the stack." << endl;
         cout << "New stack:" << endl;
-        stack.echo();
+        stack.print();
     }
     catch (const char *e)
     {
         cout << e << endl;
     }
-}
-
-/**
- * Remove all integers from the stack
- * 
- * @param stack Stack to clear
- */
-void clear(Stack<int> &stack)
-{
-    stack.clear();
-    cout << "Stack has been cleared." << endl;
-    cout << "New stack:" << endl;
-    stack.echo();
 }
 
 /**
@@ -83,9 +69,9 @@ void perform_action(char choice, Stack<int> &stack)
 {
     switch (choice)
     {
-    case 'A':
-    case 'a':
-        add(stack);
+    case 'I':
+    case 'i':
+        insert(stack);
         break;
     case 'R':
     case 'r':
@@ -93,18 +79,20 @@ void perform_action(char choice, Stack<int> &stack)
         break;
     case 'C':
     case 'c':
-        clear(stack);
+        stack.clear();
+        cout << "Stack has been cleared." << endl;
         break;
     case 'P':
     case 'p':
         cout << "Stack:" << endl;
-        stack.echo();
+        stack.print();
         break;
     case 'E':
     case 'e':
+        cout << "Exiting application." << endl;
         break;
     default:
-        cout << "Enter a valid choice." << endl;
+        cout << "Enter a valid action." << endl;
         break;
     }
 }
